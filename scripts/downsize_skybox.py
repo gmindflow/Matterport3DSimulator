@@ -37,6 +37,7 @@ def downsizeWithMerge(scan):
 
       # Load and downsize skybox image
       skybox = cv2.imread(skybox_template % (base_dir,scan,pano,skybox_ix))
+      #print('skybox: ', skybox)
       ims.append(cv2.resize(skybox,(DOWNSIZED_WIDTH,DOWNSIZED_HEIGHT),interpolation=cv2.INTER_AREA))
 
     # Save output
@@ -67,5 +68,6 @@ if __name__ == '__main__':
 
   with open('connectivity/scans.txt') as f:
     scans = [scan.strip() for scan in f.readlines()]
+    #print('scans', scans)
     p = Pool(NUM_WORKER_PROCESSES)
     p.map(downsizeWithMerge, scans)
